@@ -12,5 +12,10 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
         {
             return View();
         }
+
+        public IActionResult AgregarProducto()
+        {
+            return View();
+        }
     }
 }

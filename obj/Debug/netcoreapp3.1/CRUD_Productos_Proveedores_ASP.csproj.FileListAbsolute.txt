@@ -108,3 +108,5 @@ C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\bin\Debug\ne
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Productos\IndexProductos.cshtml.g.cs
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\IndexProveedores.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Productos\AgregarProducto.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\AgregarProveedor.cshtml.g.cs
