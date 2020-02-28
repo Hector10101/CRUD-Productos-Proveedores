@@ -20,6 +20,7 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

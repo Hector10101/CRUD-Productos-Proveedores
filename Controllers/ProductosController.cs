@@ -9,23 +9,28 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
 {
     public class ProductosController : Controller
     {
+              
         public IActionResult IndexProductos()
         {
+            
             return View();
         }
         public IActionResult AgregarProducto()
         {
+
             return View();
+
         }
         [HttpPost]
         public IActionResult AgregarProducto(DatosProductos datosProductos, ProductosM productos)
         {
             
             if (ModelState.IsValid)
-            {
+            {   
                 datosProductos.Productos.Add(productos);
                 return RedirectToAction("VerProductos", productos);
             }
+            
             return View(productos);
         }
 

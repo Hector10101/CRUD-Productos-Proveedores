@@ -22,6 +22,8 @@ namespace CRUD_Productos_Proveedores_ASP.Models
 
         [Required(ErrorMessage = "¡El campo Fecha de Vencimiento debe ser completado!")]
         public string Fecha_Vencimiento_prod { get; set; }
+
+        [Required(ErrorMessage = "¡El campo ID Producto debe ser completado!")]
         public string ID_Proveedor_prod { get; set; }
 
     }
