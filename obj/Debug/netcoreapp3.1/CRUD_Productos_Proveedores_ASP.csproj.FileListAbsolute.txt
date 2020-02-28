@@ -110,3 +110,7 @@ C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\ne
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\IndexProveedores.cshtml.g.cs
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Productos\AgregarProducto.cshtml.g.cs
 C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\AgregarProveedor.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Productos\VerProductos.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\VerProveedor.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Productos\ModificarProductos.cshtml.g.cs
+C:\Users\Hector Sanchez\source\repos\CRUD_Productos_Proveedores_ASP\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\ModificarProveedores.cshtml.g.cs

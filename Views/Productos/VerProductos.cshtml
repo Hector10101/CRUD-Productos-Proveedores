@@ -1,0 +1,50 @@
+﻿@model DatosProductos
+
+@{
+    ViewData["Title"] = "VerProductos";
+}
+
+<h1>Productos</h1>
+@if (Model.Productos.Count > 0)
+{
+    <div>
+        <a class="alert-link" asp-controller="Proveedores" asp-action="AgregarProductos"> ¿Quieres agregar un Productos?</a>
+    </div>
+}
+<br />
+
+<div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>ID Proveedor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var prodcto in Model.Productos)
+                {
+                    <tr>
+                        <td>@prodcto.ID_prod</td>
+                        <td>@prodcto.Nombre_prod</td>
+                        <td>@prodcto.Descripcion_prod</td>
+                        <td>@prodcto.Fecha_Vencimiento_prod</td>
+                        <td>@prodcto.ID_Proveedor_prod</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @if (Model.Productos.Count == 0)
+        {
+            <div class="text-center">
+                <h3><span class="text-danger">No Existen Productos. </span></h3>
+                <a class="alert-link" asp-controller="Productos" asp-action="AgregarProducto">  ¿Quieres agregar un producto?</a>
+            </div>
+        }
+    </div>
+</div>

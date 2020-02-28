@@ -3,24 +3,30 @@
     ViewData["Title"] = "AgregarProveedor";
 }
 <h1>Agregar Proveedor</h1>
+<hr />
 <br />
 <div class="col-5">
-    <form method="post">
+    <form method="post" asp-action="AgregarProveedor">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <h5>ID</h5>
-            <input class="form-control" asp-for="ID_prov" Required/>
+            <input class="form-control" asp-for="ID_prov"/>
+            <span asp-validation-for="ID_prov" class="text-danger"></span>
         </div>
         <div class="form-group">
             <h5>Nombre</h5>
-            <input class="form-control" asp-for="Nombre_prov"Required />
+            <input class="form-control" asp-for="Nombre_prov"/>
+            <span asp-validation-for="Nombre_prov" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <h5>Direccion</h5>
-            <input asp-for="Direccion_prov" class="form-control"  placeholder="La Romana, Meliza, Calle Primera #6" Required/>
+            <h5>Dirección</h5>
+            <input asp-for="Direccion_prov" class="form-control" placeholder="R.D. La Romana, Meliza, Calle Primera #6"/>
+            <span asp-validation-for="Direccion_prov" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <h5>Telefono</h5>
-            <input asp-for="Numero_Telefonico_prov" class="form-control input-phone" type="text" maxlength="12" id="phone" name="phone" placeholder="000-000-0000" pattern="[0-9]{3}[ -][0-9]{3}[ -][0-9]{4}" title="Formato: 000-000-0000" Required/>
+            <h5>Teléfono</h5>
+            <input asp-for="Numero_Telefonico_prov" class="form-control input-phone" maxlength="12" id="phone" placeholder="000-000-0000" pattern="[0-9]{3}[ -][0-9]{3}[ -][0-9]{4}" title="Formato: 000-000-0000"/>
+            <span asp-validation-for="Numero_Telefonico_prov" class="text-danger"></span>
         </div>
         <button class="btn btn-primary">Agregar</button>
     </form>

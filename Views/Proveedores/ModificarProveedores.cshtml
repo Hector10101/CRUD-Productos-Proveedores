@@ -1,0 +1,31 @@
+﻿@model ProveedoresM
+@{
+    ViewData["Title"] = "Modificar Proveedores";
+}
+<h1>Modificar Proveedores</h1>
+<a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
+<br />
+<br />
+<div class="col-5">
+    <form method="post" role="form">
+        <div class="form-group">
+            <h5>ID</h5>
+            <input class="form-control" asp-for="ID_prov" Required />
+            <span asp-validation-for="ID_prov" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <h5>Nombre</h5>
+            <input class="form-control" asp-for="Nombre_prov" Required />
+        </div>
+        <div class="form-group">
+            <h5>Direccion</h5>
+            <input asp-for="Direccion_prov" class="form-control" placeholder="R.D. La Romana, Meliza, Calle Primera #6" Required />
+        </div>
+        <div class="form-group">
+            <h5>Telefono</h5>
+            <input asp-for="Numero_Telefonico_prov" class="form-control input-phone" type="text" maxlength="12" id="phone" name="phone" placeholder="000-000-0000" pattern="[0-9]{3}[ -][0-9]{3}[ -][0-9]{4}" title="Formato: 000-000-0000" Required />
+        </div>
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>

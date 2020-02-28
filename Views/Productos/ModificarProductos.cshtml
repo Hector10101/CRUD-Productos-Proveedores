@@ -1,0 +1,36 @@
+﻿@model ProductosM
+@{
+    ViewData["Title"] = "Modificar Productos";
+}
+<h1>Modificar Productos </h1>
+<a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+<br />
+<br />
+<div class="col-5">
+    <form method="post" role="form">
+        <div class="form-group">
+            <h5>ID</h5>
+            <input class="form-control" asp-for="ID_prod" Required />
+            <span asp-validation-for="ID_prod" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <h5>Nombre</h5>
+            <input class="form-control" asp-for="Nombre_prod" Required />
+        </div>
+        <div class="form-group">
+            <h5>Descripcion</h5>
+            <textarea asp-for="Descripcion_prod" class="form-control" rows="3" placeholder="El mejor producto de todo el mercado..." Required></textarea>
+
+        </div>
+        <div class="form-group">
+            <h5>Frecha de Vencimiento</h5>
+            <input asp-for="Fecha_Vencimiento_prod" class="form-control" type="date" Required />
+        </div>
+        <div class="form-group">
+            <h5>ID del Proveedor</h5>
+            <select asp-for="ID_Proveedor_prod" class="form-control" id="exampleFormControlSelect1" Required> </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>

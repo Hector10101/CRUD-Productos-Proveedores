@@ -1,37 +1,58 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Proveedores";
 }
 
-    <h1>Proveedores</h1>
-    <div class="container text-center">
-        <br />
-        <br />
-        <br />
-        <br />
+<h1 class="">Proveedores</h1>
+<hr />
+<div class="container text-center">
+    <br />
+    <br />
+    <br />
+    <br />
 
-        <div class="text-center  form-group row">
-            <div class="col-4">
+    <div class="text-center  form-group row">
+        <div class="col-4">
+            <div class="Contenedores">
                 <h4>Agregar un nuevo Proveedor</h4>
                 <br />
-                <p class="">Descripcion...</p>
+                <p class="font-italic">Descripcion...</p>
                 <br />
-                <a class="btn btn-success" asp-controller="Proveedores" asp-action="AgregarProveedor">Ir</a>
+                <a class="btn btn-primary" asp-controller="Proveedores" asp-action="AgregarProveedor">Agregar</a>
             </div>
-            <div class="col-5">
+                
+        </div>
+        <div class="col-4">
+            <div class="Contenedores">
                 <h4>Editar/Eliminar un Proveedor</h4>
                 <br />
-                <p class="">Descripcion...</p>
+                <p class="font-italic">Descripcion...</p>
                 <br />
-                <a class="btn btn-success" asp-controller="Proveedores" asp-action="IndexProveedores">Ir</a>
+                <a class="btn btn-primary" asp-controller="Proveedores" asp-action="ModificarProveedores">Editar/Eliminar</a>
             </div>
-            <div class="col-3">
+        </div>
+        <div class="col-4">
+            <div class="Contenedores Contenedor3">
                 <h4>Ver Proveedores</h4>
                 <br />
-                <p class="">Descripcion...</p>
                 <br />
-                <a class="btn btn-success" asp-controller="Proveedores" asp-action="IndexProveedores">Ir</a>
+                <p class="font-italic">Descripcion...</p>
+                <br />
+                <a class="btn btn-primary" asp-controller="Proveedores" asp-action="VerProveedor">Ver</a>
             </div>
         </div>
     </div>
+</div>
+
+
+<style>
+    .Contenedores {
+        padding: 40px 20px;
+        border-radius: 2%;
+        background-color: #E6E6E6;
+    }
+    .Contenedor3{
+        padding: 42px 20px;
+            
+    }
+</style>
 
