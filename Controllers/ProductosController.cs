@@ -25,12 +25,30 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
         [HttpPost]
         public IActionResult AgregarProducto(DatosProductos datosProductos, ProductosM productos)
         {
-            
+            var X = "Hola";
             if (ModelState.IsValid)
-            {   
-                datosProductos.Productos.Add(productos);
+            {
+                foreach (var data in datosProductos.Productos)
+                {
+                    if (data.ID_prod == productos.ID_prod)
+                    {
+                        X = data.ID_prod;
+                        break;
+                    }
+                }
+
+                if (X != productos.ID_prod)
+                {
+                    datosProductos.Productos.Add(productos);
+
+                    return RedirectToAction("VerProductos", productos);
+                }
+                else
+                {
+                    ViewData["IDInValido"] = "Este ID ya existe!";
+                }
                 
-                return RedirectToAction("VerProductos", productos);
+                
             }
             
             return View(productos);
@@ -42,11 +60,11 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
             return View(datosProductos);
         }
 
-        public IActionResult ModificarProductos(DatosProductos datosProductos)
+        public IActionResult ModificarProductos(ProductosM productos)
         {
           
 
-            return View(datosProductos);
+            return View(productos);
         }
 
       
@@ -70,23 +88,23 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
                     break;          
                 }
             }
-
             var ValorBotonEdit = Request.Form["Editar"];
 
             if (ValorBotonEdit == "0" ) 
             {
-                var IdProduct = datosProductos.datoSelectIdProduct;
-                return RedirectToAction("EditarProductos", new {ProductoID = IdProduct} );
+                var IdProduct = productos.ID_prod;
+                return RedirectToAction("EditarProductos" , new {ProductoID = IdProduct});
+                
             }
             var ValorBotonEliminar = Request.Form["Eliminar"];
 
             if (ValorBotonEliminar == "1")
             {
-                var IdProduct = datosProductos.datoSelectIdProduct;
-                return RedirectToAction("EliminarProductos", new { ProductoID = IdProduct });
+                var IdProduct = productos.ID_prod;
+                return RedirectToAction("EliminarProductos" , new { ProductoID = IdProduct });
             }
 
-            return View(datosProductos);
+            return View(productos);
         }
         
         public IActionResult EditarProductos(DatosProductos datosProductos, string ProductoID)
@@ -101,12 +119,37 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
                     ViewData["Descripcion"] = data.Descripcion_prod;
                     ViewData["Fecha_Venci"] = data.Fecha_Vencimiento_prod;
                     ViewData["ID_Proveedor"] = data.ID_Proveedor_prod;
-
                     break;
                 }
             }
             ViewBag.IDProducto = ProductoID;
+
             return View();
+        }
+        [HttpPost]
+        public IActionResult EditarProductos(string ProductoID, DatosProductos datosProductos, ProductosM productosM)
+        {
+            ViewBag.IDProducto = ProductoID;
+
+            if (ModelState.IsValid)
+            {
+                int Y = 0;
+                foreach (var data in datosProductos.Productos)
+                {
+                    if (data.ID_prod == ProductoID)
+                    {
+
+                        break;
+                    }
+                    Y++;
+                }
+                datosProductos.Productos.RemoveAt(Y);
+                datosProductos.Productos.Add(productosM);
+
+                return RedirectToAction("ModificarProductos");
+            }
+            return View(productosM);
+            
         }
         public IActionResult EliminarProductos(DatosProductos datosProductos, string ProductoID)
         {
@@ -120,12 +163,30 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
                     ViewData["Descripcion"] = data.Descripcion_prod;
                     ViewData["Fecha_Venci"] = data.Fecha_Vencimiento_prod;
                     ViewData["ID_Proveedor"] = data.ID_Proveedor_prod;
-
                     break;
                 }
             }
             ViewBag.IDProducto = ProductoID;
-            return View();
+            return View(datosProductos);
+        }
+        [HttpPost]
+        public IActionResult EliminarProductos(string ProductoID)
+        {
+            DatosProductos datosProductos = new DatosProductos();
+            int Y = 0;
+            
+            foreach (var X in datosProductos.Productos)
+            {
+                if (ProductoID == X.ID_prod)
+                {
+
+                    break;
+                }
+                Y++;
+            }
+            
+            datosProductos.Productos.RemoveAt(Y);
+            return RedirectToAction("ModificarProductos");
         }
     }
 }

@@ -1,36 +1,80 @@
-﻿
+﻿@model ProductosM
 @{
     ViewData["Title"] = "EditarProductos";
-    
+    DatosProveedor datosProveedor = new DatosProveedor();
+    DatosProductos datosProductos = new DatosProductos();
+    int X = 0;
+
 }
 
+
+
 <h1>Editar Producto</h1>
-<a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
-<br />
-<br />
-<div class="col-6 formulario">
-    <form method="post" role="form">
-        <div class="form-group">
-            <h5>ID</h5>
-            <input id="ID" value="@ViewData["ID"]" class="form-control" />
-        </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input value="@ViewData["Nombre"]" class="form-control" />
-        </div>
-        <div class="form-group">
-            <h5>Descripcion</h5>
-            <textarea value="" class="form-control" rows="3" >@ViewData["Descripcion"]</textarea>
-        </div>
-        <div class="form-group">
-            <h5>Frecha de Vencimiento</h5>
-            <input value="@ViewData["Fecha_Venci"]" class="form-control" />
-        </div>
-        <div class="form-group">
-            <h5>ID del Proveedor</h5>
-            <input value="@ViewData["ID_Proveedor"]" class="form-control" />
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <button class="btn btn-primary" asp-action="ModificarProductos">Ir a Modificacion</button>
-    </form>
-</div>
+@foreach (var data in datosProductos.Productos)
+{
+    if (data.ID_prod == ViewBag.IDProducto)
+    {
+        X = 1;
+        break;
+    }
+}
+@if (X == 1)
+{
+    <a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+    <br />
+    <br />
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h5>ID</h5>
+                <input id="ID" asp-for="ID_prod" value="@ViewData["ID"]" class="form-control" readonly />
+                <span asp-validation-for="ID_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input asp-for="Nombre_prod" value="@ViewData["Nombre"]" class="form-control" required />
+                <span asp-validation-for="Nombre_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Descripción</h5>
+
+                <textarea asp-for="Descripcion_prod" value="Hola" class="form-control" placeholder="Debes agregar una nueva descripción . La descripción anterior era: @ViewData["Descripcion"]" rows="3" required></textarea>
+                <span asp-validation-for="Descripcion_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Fecha de Vencimiento</h5>
+                <input asp-for="Fecha_Vencimiento_prod" value="@ViewData["Fecha_Venci"]" type="date" class="form-control" required />
+                <span asp-validation-for="Fecha_Vencimiento_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>ID del Proveedor</h5>
+                <select asp-for="ID_Proveedor_prod" class="form-control" required>
+                    <option selected>@ViewData["ID_Proveedor"]</option>
+                    @foreach (var Data in datosProveedor.Proveedores)
+                    {
+                        <option>@Data.ID_prov</option>
+                    }
+                </select>
+                <span asp-validation-for="ID_Proveedor_prod" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+
+            <a class="btn btn-primary" asp-controller="Productos" asp-action="ModificarProductos">Ir a Modificacion</a>
+        </form>
+    </div>
+    
+}
+else
+{
+    <hr />
+    <br />
+    <br />
+    <br />
+
+    <div class="text-center">
+        <h3><span class="text-danger">Debes seleccionar un producto.</span></h3>
+        <a class="alert-link" asp-controller="Productos" asp-action="ModificarProductos">Volver</a>
+    </div>
+}

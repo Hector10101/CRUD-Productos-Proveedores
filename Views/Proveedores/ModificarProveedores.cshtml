@@ -1,10 +1,11 @@
-﻿@model DatosProveedor
+﻿@model ProveedoresM
 @{
     ViewData["Title"] = "Modificar Proveedores";
+    DatosProveedor datosProveedor = new DatosProveedor();
     int i = 0;
 }
 <h1>Modificar Proveedores</h1>
-@if (Model.Proveedores.Count > 0)
+@if (datosProveedor.Proveedores.Count > 0)
 {
     <a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
 }
@@ -16,22 +17,26 @@
         <form method="post" role="form">
             <div class="form-group">
                 <h5>ID</h5>
-                <input asp-for="datoSelectIdProveedor" value="@ViewData["ID"]" class="form-control" readonly Required />
+                <input asp-for="ID_prov" value="@ViewData["ID"]" class="form-control" readonly Required />
             </div>
             <div class="form-group">
                 <h5>Nombre</h5>
                 <input value="@ViewData["Nombre"]" class="form-control" readonly Required />
             </div>
             <div class="form-group">
-                <h5>Direccion</h5>
+                <h5>Dirección</h5>
                 <input value="@ViewData["Direccion"]" class="form-control" readonly Required />
             </div>
             <div class="form-group">
-                <h5>Telefono</h5>
+                <h5>Teléfono</h5>
                 <input value="@ViewData["Telefono"]" class="form-control" readonly Required />
             </div>
-            <button name="Editar" value="0" type="submit" class="btn btn-primary">Ir a Editar</button>
-            <button name="Eliminar" value="1" type="submit"  class="btn btn-danger">Ir a Eliminar</button>
+            @if (datosProveedor.Proveedores.Count > 0)
+            {
+                <button name="Editar" value="0" type="submit" class="btn btn-primary">Ir a Editar</button>
+                <button name="Eliminar" value="1" type="submit" class="btn btn-danger">Ir a Eliminar</button>
+            }
+
         </form>
     </div>
     <div class="col-6 ">
@@ -39,7 +44,7 @@
         <form class="row" method="post">
             <select name="Posicion" class="col-9 form-control">
                 <option value="" selected>Selecciona</option>
-                @foreach (var Id in Model.Proveedores)
+                @foreach (var Id in datosProveedor.Proveedores)
                 {
 
                     <option value="@Id.ID_prov">@Id.ID_prov- @Id.Nombre_prov </option>
@@ -54,7 +59,7 @@
         <br />
         <br />
 
-        @if (Model.Proveedores.Count > 0)
+        @if (datosProveedor.Proveedores.Count > 0)
         {
             <table class="table table-striped ">
                 <thead class="badge-dark">
@@ -67,7 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var producto in Model.Proveedores)
+                    @foreach (var producto in datosProveedor.Proveedores)
                     {
                         <tr>
 

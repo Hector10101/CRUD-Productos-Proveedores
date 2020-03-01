@@ -1,11 +1,13 @@
-﻿@model DatosProductos
+﻿@model ProductosM
 @{
     ViewData["Title"] = "Modificar Productos";
+    DatosProductos datosProductos = new DatosProductos();
     int i = 0;
+
 }
 
 <h1>Modificar Productos </h1>
-@if (Model.Productos.Count > 0)
+@if (datosProductos.Productos.Count > 0)
 {
     <a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
 }
@@ -17,7 +19,7 @@
         <form method="post" role="form">
             <div class="form-group">
                 <h5>ID</h5>
-                <input asp-for="datoSelectIdProduct" value="@ViewData["ID"]" class="form-control" readonly Required />
+                <input asp-for="ID_prod" value="@ViewData["ID"]" class="form-control" readonly Required />
             </div>
             <div class="form-group">
                 <h5>Nombre</h5>
@@ -36,8 +38,12 @@
                 <input value="@ViewData["ID_Proveedor"]" class="form-control" readonly Required />
             </div>
 
-            <button name="Editar" value="0"  class="btn btn-primary">Ir a Editar</button>
-            <button name="Eliminar" value="1" class="btn btn-danger">Ir a Eliminar</button>
+            @if (datosProductos.Productos.Count > 0)
+            {
+                <button name="Editar" value="0" class="btn btn-primary">Ir a Editar</button>
+                <button name="Eliminar" value="1" class="btn btn-danger">Ir a Eliminar</button>
+            }
+
 
         </form>
     </div>
@@ -47,7 +53,7 @@
         <form class="row" method="post">
             <select name="posicion" id="opciones" class="col-9 form-control">
                 <option value="" selected>Selecciona</option>
-                @foreach (var Id in Model.Productos)
+                @foreach (var Id in datosProductos.Productos)
                 {
                     <option value="@Id.ID_prod">ID: @Id.ID_prod ; Nombre: @Id.Nombre_prod;  </option>
                     @(i++)
@@ -60,7 +66,7 @@
         <br />
         <br />
 
-        @if (Model.Productos.Count > 0)
+        @if (datosProductos.Productos.Count > 0)
         {
             <table class="table table-striped ">
                 <thead class="badge-dark">
@@ -71,7 +77,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var producto in Model.Productos)
+                    @foreach (var producto in datosProductos.Productos)
                     {
                         <tr>
                             <td>@producto.ID_prod</td>

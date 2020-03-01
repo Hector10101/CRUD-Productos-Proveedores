@@ -21,10 +21,28 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
         [HttpPost]
         public IActionResult AgregarProveedor(DatosProveedor datosProveedor, ProveedoresM proveedores)
         {
+            var X = "Hola";
             if (ModelState.IsValid)
             {
-                datosProveedor.Proveedores.Add(proveedores);
-                return RedirectToAction("VerProveedor", proveedores);
+                foreach (var data in datosProveedor.Proveedores)
+                {
+                    if (data.ID_prov == proveedores.ID_prov)
+                    {
+                        X = data.ID_prov;
+                        break;
+                    }
+
+                }
+                if (X != proveedores.ID_prov)
+                {
+                    datosProveedor.Proveedores.Add(proveedores);
+                    return RedirectToAction("VerProveedor", proveedores);
+                }
+                else
+                {
+                    ViewData["IDInValido"] = "Este ID ya existe!";
+                }
+                
             }
             return View(proveedores);
         }
@@ -35,10 +53,10 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
         }
         
 
-        public IActionResult ModificarProveedores(DatosProveedor datosProveedor)
+        public IActionResult ModificarProveedores(ProveedoresM proveedoresM)
         {
 
-            return View(datosProveedor);
+            return View(proveedoresM);
         }
 
         [HttpPost]
@@ -55,6 +73,7 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
                     ViewData["Nombre"] = data.Nombre_prov;
                     ViewData["Direccion"] = data.Direccion_prov;
                     ViewData["Telefono"] = data.Numero_Telefonico_prov;
+                    
                     break;
                 }
             }
@@ -63,23 +82,28 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
 
             if (ValorBotonEdit == "0")
             {
-                var IdProvee = datosProveedor.datoSelectIdProveedor;
-                return RedirectToAction("EditarProveedor", new { ProveedorID = IdProvee });
+               
+                    var IdProvee = proveedoresM.ID_prov;
+                    return RedirectToAction("EditarProveedor", new { ProveedorID = IdProvee });
+ 
+                
             }
             var ValorBotonEliminar = Request.Form["Eliminar"];
 
             if (ValorBotonEliminar == "1")
             {
-                var IdProvee = datosProveedor.datoSelectIdProveedor;
+                
+                var IdProvee = proveedoresM.ID_prov;
                 return RedirectToAction("EliminarProveedor", new { ProveedorID = IdProvee });
             }
 
-            return View(datosProveedor);
+            return View(proveedoresM);
         }
 
 
-        public IActionResult EditarProveedor(DatosProveedor datosProveedor, string ProveedorID)
+        public IActionResult EditarProveedor(ProveedoresM proveedoresM, string ProveedorID)
         {
+            DatosProveedor datosProveedor = new DatosProveedor();
             foreach (var data in datosProveedor.Proveedores)
             {
 
@@ -92,10 +116,32 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
 
                     break;
                 }
-            }            
-            return View();
+            }
+            ViewBag.IDProveedor = ProveedorID;
+
+            return View(proveedoresM);
         }
-        public IActionResult EliminarProveedor(DatosProveedor datosProveedor, string ProveedorID)
+        [HttpPost]
+        public IActionResult EditarProveedor(ProveedoresM proveedoresM, DatosProveedor datosProveedor, string ProveedorID)
+        {
+
+            int Y = 0;
+
+            foreach (var data in datosProveedor.Proveedores)
+            {
+                if (data.ID_prov == ProveedorID)
+                {
+
+                    break;
+                }
+                Y++;
+            }
+            datosProveedor.Proveedores.RemoveAt(Y);
+            datosProveedor.Proveedores.Add(proveedoresM);
+
+            return RedirectToAction("ModificarProveedores");
+        }
+        public IActionResult EliminarProveedor(ProveedoresM proveedoresM, DatosProveedor datosProveedor, string ProveedorID)
         {
             foreach (var data in datosProveedor.Proveedores)
             {
@@ -109,8 +155,29 @@ namespace CRUD_Productos_Proveedores_ASP.Controllers
                     break;
                 }
             }
+            ViewBag.IDProveedor = ProveedorID;
 
-            return View();
+            return View(proveedoresM);
+        }
+        [HttpPost]
+        public IActionResult EliminarProveedor(string ProveedorID)
+        {
+            DatosProveedor datosProveedor = new DatosProveedor();
+            int Y = 0;
+            
+            foreach (var data in datosProveedor.Proveedores)
+            {
+                if (ProveedorID == data.ID_prov)
+                {
+
+                    break;
+                }
+                Y++;
+            }
+
+            datosProveedor.Proveedores.RemoveAt(Y);
+
+            return RedirectToAction("ModificarProveedores");
         }
     }
 }

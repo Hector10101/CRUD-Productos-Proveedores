@@ -9,47 +9,60 @@
 <h1>Agregar Producto</h1>
 <hr />
 <br />
-@if (ViewBag.IDProveedor.Count == 0)
-{
-    <div class="text-center">
-        <h3><span class="text-danger">Debes tener almenos un Proveedor para agregar un Producto. No Existen Proveedores. </span></h3>
-        <a class="alert-link" asp-controller="Proveedores" asp-action="AgregarProveedor">  ¿Quieres agregar un proveedor?</a>
+
+<div class="row">
+    <div class="col-5">
+        <form method="post" asp-controller="Productos" asp-action="AgregarProducto">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h5>ID</h5>
+                <input class="form-control" asp-for="ID_prod" />
+                <span class="text-danger">@ViewData["IDInValido"]</span>
+                <span asp-validation-for="ID_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input class="form-control" asp-for="Nombre_prod" />
+                <span asp-validation-for="Nombre_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Descripción</h5>
+                <textarea asp-for="Descripcion_prod" class="form-control" rows="3" placeholder="El mejor producto de todo el mercado..."></textarea>
+                <span asp-validation-for="Descripcion_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>Fecha de Vencimiento</h5>
+                <input asp-for="Fecha_Vencimiento_prod" class="form-control" type="date" />
+                <span asp-validation-for="Fecha_Vencimiento_prod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h5>ID del Proveedor</h5>
+                <select asp-for="ID_Proveedor_prod" class="form-control" id="exampleFormControlSelect1">
+                    @foreach (var Id in (List<ProveedoresM>)ViewBag.IDProveedor)
+                    {
+                        <option>@Id.ID_prov </option>
+                    }
+                </select>
+                <span asp-validation-for="ID_Proveedor_prod" class="text-danger"></span>
+            </div>
+            @if (ViewBag.IDProveedor.Count != 0)
+            {
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            }
+            
+        </form>
+
     </div>
-}
-<div class="col-5">
-    <form method="post" asp-controller="Productos" asp-action="AgregarProducto">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <h5>ID</h5>
-            <input class="form-control" asp-for="ID_prod" />
-            <span asp-validation-for="ID_prod" class="text-danger"></span>
+    @if (ViewBag.IDProveedor.Count == 0)
+    {
+        <div class="col-7 text-center">
+            <br />
+            <br />
+            <br />
+            <h3><span class="text-danger">Debes tener algun proveedor </span></h3>
+            <a class="alert-link" asp-controller="Proveedores" asp-action="AgregarProveedor"> Ir a agregar un proveedor</a>
         </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input class="form-control" asp-for="Nombre_prod" />
-            <span asp-validation-for="Nombre_prod" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h5>Descripcion</h5>
-            <textarea asp-for="Descripcion_prod" class="form-control" rows="3" placeholder="El mejor producto de todo el mercado..." ></textarea>
-            <span asp-validation-for="Descripcion_prod" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h5>Frecha de Vencimiento</h5>
-            <input asp-for="Fecha_Vencimiento_prod" class="form-control" type="date"  />
-            <span asp-validation-for="Fecha_Vencimiento_prod" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h5>ID del Proveedor</h5>
-            <select asp-for="ID_Proveedor_prod" class="form-control" id="exampleFormControlSelect1" >
-                @foreach (var Id in (List<ProveedoresM>)ViewBag.IDProveedor)
-                {
-                    <option>@Id.ID_prov </option>
-                }
-            </select>
-            <span asp-validation-for="ID_Proveedor_prod" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar</button>
-    </form>
+    }
 </div>
+
 

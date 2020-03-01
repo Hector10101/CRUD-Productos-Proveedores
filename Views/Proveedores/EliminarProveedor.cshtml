@@ -1,33 +1,58 @@
-﻿
+﻿@model ProveedoresM
 @{
+    DatosProveedor datosProveedor = new DatosProveedor();
+    int X = 0;
     ViewData["Title"] = "EliminarProveedor";
 }
 
 <h1>Eliminar Proveedor</h1>
 
-<a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
-<br />
-<br />
-<div class="col-6 formulario">
-    <form method="post" role="form">
-        <div class="form-group">
-            <h5>ID</h5>
-            <input id="ID" value="@ViewData["ID"]" class="form-control" readonly/>
-        </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input value="@ViewData["Nombre"]" class="form-control" readonly/>
-        </div>
-        <div class="form-group">
-            <h5>Descripcion</h5>
-            <textarea value="" class="form-control" rows="3" readonly>@ViewData["Direccion"]</textarea>
-        </div>
-        <div class="form-group">
-            <h5>Telefono</h5>
-            <input value="@ViewData["Telefono"]" class="form-control" readonly/>
-        </div>
+@foreach (var data in datosProveedor.Proveedores)
+{
+    if (data.ID_prov == ViewBag.IDProveedor)
+    {
+        X = 1;
+        break;
+    }
+}
+@if (X == 1)
+{
+    <a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
+    <br />
+    <br />
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div class="form-group">
+                <h5>ID</h5>
+                <input id="ID" asp-for="ID_prov" value="@ViewData["ID"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input value="@ViewData["Nombre"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>Dirección</h5>
+                <input asp-for="Direccion_prov" value="@ViewData["Direccion"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>Teléfono</h5>
+                <input value="@ViewData["Telefono"]" class="form-control" readonly />
+            </div>
 
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-        <button class="btn btn-primary" asp-action="ModificarProveedores">Ir a Modificacion</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-primary" asp-controller="Proveedores" asp-action="ModificarProveedores">Ir a Modificacion</a>
+        </form>
+    </div>
+}
+else
+{
+    <hr />
+    <br />
+    <br />
+    <br />
+
+    <div class="text-center">
+        <h3><span class="text-danger">Debes seleccionar un Proveedor.</span></h3>
+        <a class="alert-link" asp-controller="Proveedores" asp-action="ModificarProveedores">Volver</a>
+    </div>
+}

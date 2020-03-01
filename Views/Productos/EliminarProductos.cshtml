@@ -1,35 +1,68 @@
-﻿
+﻿@model DatosProductos
 @{
     ViewData["Title"] = "Eliminar";
+    
+    int X = 0;
 }
 
 <h1>Eliminar Producto</h1>
-<a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
-<br />
-<br />
-<div class="col-6 formulario">
-    <form method="post" role="form">
-        <div class="form-group">
-            <h5>ID</h5>
-            <input id="ID" value="@ViewData["ID"]" class="form-control" readonly />
-        </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input value="@ViewData["Nombre"]" class="form-control" readonly />
-        </div>
-        <div class="form-group">
-            <h5>Descripcion</h5>
-            <textarea value="" class="form-control" rows="3" readonly >@ViewData["Descripcion"]</textarea>
-        </div>
-        <div class="form-group">
-            <h5>Frecha de Vencimiento</h5>
-            <input value="@ViewData["Fecha_Venci"]" class="form-control" readonly />
-        </div>
-        <div class="form-group">
-            <h5>ID del Proveedor</h5>
-            <input value="@ViewData["ID_Proveedor"]" class="form-control" readonly />
-        </div>
-        <button class="btn btn-primary" asp-controller="Productos" asp-action="ModificarProductos">Ir a Modificacion</button>
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
-</div>
+
+@foreach (var data in Model.Productos)
+{
+    if (data.ID_prod == ViewBag.IDProducto)
+    {
+        X = 1;
+        break;
+    }
+}
+@if (X == 1)
+{
+    <a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+    <br />
+    <br />
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div class="form-group">
+                <h5>ID</h5>
+                <input id="ID"  value="@ViewData["ID"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+
+                <input value="@ViewData["Nombre"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>Descripcion</h5>
+                <textarea value="" class="form-control" rows="3" readonly>@ViewData["Descripcion"]</textarea>
+            </div>
+            <div class="form-group">
+                <h5>Frecha de Vencimiento</h5>
+                <input value="@ViewData["Fecha_Venci"]" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <h5>ID del Proveedor</h5>
+                <input value="@ViewData["ID_Proveedor"]" class="form-control" readonly />
+            </div>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-primary" asp-controller="Productos" asp-action="ModificarProductos">Ir a Modificacion</a>
+        </form>
+    </div>
+
+}
+else
+{
+    <hr />
+    <br />
+    <br />
+    <br />
+
+    <div class="text-center">
+        <h3><span class="text-danger">Debes seleccionar un producto.</span></h3>
+        <a class="alert-link" asp-controller="Productos" asp-action="ModificarProductos">Volver</a>
+    </div>
+}
+
+
+
+
+

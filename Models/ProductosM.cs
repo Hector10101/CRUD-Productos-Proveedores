@@ -32,7 +32,6 @@ namespace CRUD_Productos_Proveedores_ASP.Models
 
     public class DatosProductos
     {
-        public string datoSelectIdProduct { get; set; }
         private static List<ProductosM> Producto;
         public List<ProductosM> Productos
         {

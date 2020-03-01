@@ -24,7 +24,6 @@ namespace CRUD_Productos_Proveedores_ASP.Models
 
     public class DatosProveedor
     {
-        public string datoSelectIdProveedor { get; set; }
         
         private static List<ProveedoresM> Proveedor;
         public List<ProveedoresM> Proveedores
