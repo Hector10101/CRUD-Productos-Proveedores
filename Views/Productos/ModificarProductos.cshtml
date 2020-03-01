@@ -1,36 +1,103 @@
-﻿@model ProductosM
+﻿@model DatosProductos
 @{
     ViewData["Title"] = "Modificar Productos";
+    int i = 0;
 }
-<h1>Modificar Productos </h1>
-<a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
-<br />
-<br />
-<div class="col-5">
-    <form method="post" role="form">
-        <div class="form-group">
-            <h5>ID</h5>
-            <input class="form-control" asp-for="ID_prod" Required />
-            <span asp-validation-for="ID_prod" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input class="form-control" asp-for="Nombre_prod" Required />
-        </div>
-        <div class="form-group">
-            <h5>Descripcion</h5>
-            <textarea asp-for="Descripcion_prod" class="form-control" rows="3" placeholder="El mejor producto de todo el mercado..." Required></textarea>
 
-        </div>
-        <div class="form-group">
-            <h5>Frecha de Vencimiento</h5>
-            <input asp-for="Fecha_Vencimiento_prod" class="form-control" type="date" Required />
-        </div>
-        <div class="form-group">
-            <h5>ID del Proveedor</h5>
-            <select asp-for="ID_Proveedor_prod" class="form-control" id="exampleFormControlSelect1" Required> </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Editar</button>
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
+<h1>Modificar Productos </h1>
+@if (Model.Productos.Count > 0)
+{
+    <a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div class="form-group">
+                <h5>ID</h5>
+                <input asp-for="datoSelectIdProduct" value="@ViewData["ID"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input value="@ViewData["Nombre"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>Descripcion</h5>
+                <textarea value="" class="form-control" rows="3" readonly Required>@ViewData["Descripcion"]</textarea>
+            </div>
+            <div class="form-group">
+                <h5>Frecha de Vencimiento</h5>
+                <input value="@ViewData["Fecha_Venci"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>ID del Proveedor</h5>
+                <input value="@ViewData["ID_Proveedor"]" class="form-control" readonly Required />
+            </div>
+
+            <button name="Editar" value="0"  class="btn btn-primary">Ir a Editar</button>
+            <button name="Eliminar" value="1" class="btn btn-danger">Ir a Eliminar</button>
+
+        </form>
+    </div>
+
+    <div class="col-6 ">
+        <h5 class="text-primary">Selecciona el Producto</h5>
+        <form class="row" method="post">
+            <select name="posicion" id="opciones" class="col-9 form-control">
+                <option value="" selected>Selecciona</option>
+                @foreach (var Id in Model.Productos)
+                {
+                    <option value="@Id.ID_prod">ID: @Id.ID_prod ; Nombre: @Id.Nombre_prod;  </option>
+                    @(i++)
+                }
+            </select>
+            <div class="col-3">
+                <button name="ver" class="btn btn-primary" type="submit">Seleccionar</button>
+            </div>
+        </form>
+        <br />
+        <br />
+
+        @if (Model.Productos.Count > 0)
+        {
+            <table class="table table-striped ">
+                <thead class="badge-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>ID Proveedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in Model.Productos)
+                    {
+                        <tr>
+                            <td>@producto.ID_prod</td>
+                            <td>@producto.Nombre_prod</td>
+                            <td>@producto.ID_Proveedor_prod</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-md-right">
+                <a class="btn btn-primary" asp-controller="Productos" asp-action="VerProductos">Más detalles</a>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <h4><span class="text-danger">No Existen Productos.</span></h4>
+                <a class="alert-link" asp-controller="Productos" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+            </div>
+        }
+    </div>
 </div>
+
+<style>
+    .formulario {
+        padding-right: 80px;
+    }
+</style>
+

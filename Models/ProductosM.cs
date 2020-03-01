@@ -26,10 +26,13 @@ namespace CRUD_Productos_Proveedores_ASP.Models
         [Required(ErrorMessage = "¡El campo ID Producto debe ser completado!")]
         public string ID_Proveedor_prod { get; set; }
 
+
     }
+
 
     public class DatosProductos
     {
+        public string datoSelectIdProduct { get; set; }
         private static List<ProductosM> Producto;
         public List<ProductosM> Productos
         {

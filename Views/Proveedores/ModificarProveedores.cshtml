@@ -1,31 +1,101 @@
-﻿@model ProveedoresM
+﻿@model DatosProveedor
 @{
     ViewData["Title"] = "Modificar Proveedores";
+    int i = 0;
 }
 <h1>Modificar Proveedores</h1>
-<a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
+@if (Model.Proveedores.Count > 0)
+{
+    <a class="alert-link" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
+}
+
 <br />
 <br />
-<div class="col-5">
-    <form method="post" role="form">
-        <div class="form-group">
-            <h5>ID</h5>
-            <input class="form-control" asp-for="ID_prov" Required />
-            <span asp-validation-for="ID_prov" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h5>Nombre</h5>
-            <input class="form-control" asp-for="Nombre_prov" Required />
-        </div>
-        <div class="form-group">
-            <h5>Direccion</h5>
-            <input asp-for="Direccion_prov" class="form-control" placeholder="R.D. La Romana, Meliza, Calle Primera #6" Required />
-        </div>
-        <div class="form-group">
-            <h5>Telefono</h5>
-            <input asp-for="Numero_Telefonico_prov" class="form-control input-phone" type="text" maxlength="12" id="phone" name="phone" placeholder="000-000-0000" pattern="[0-9]{3}[ -][0-9]{3}[ -][0-9]{4}" title="Formato: 000-000-0000" Required />
-        </div>
-        <button type="submit" class="btn btn-primary">Editar</button>
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
+<div class="row">
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div class="form-group">
+                <h5>ID</h5>
+                <input asp-for="datoSelectIdProveedor" value="@ViewData["ID"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input value="@ViewData["Nombre"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>Direccion</h5>
+                <input value="@ViewData["Direccion"]" class="form-control" readonly Required />
+            </div>
+            <div class="form-group">
+                <h5>Telefono</h5>
+                <input value="@ViewData["Telefono"]" class="form-control" readonly Required />
+            </div>
+            <button name="Editar" value="0" type="submit" class="btn btn-primary">Ir a Editar</button>
+            <button name="Eliminar" value="1" type="submit"  class="btn btn-danger">Ir a Eliminar</button>
+        </form>
+    </div>
+    <div class="col-6 ">
+        <h5 class="text-primary">Selecciona el Producto</h5>
+        <form class="row" method="post">
+            <select name="Posicion" class="col-9 form-control">
+                <option value="" selected>Selecciona</option>
+                @foreach (var Id in Model.Proveedores)
+                {
+
+                    <option value="@Id.ID_prov">@Id.ID_prov- @Id.Nombre_prov </option>
+                    @(i++)
+                }
+            </select>
+            <div class="col-3">
+                <button name="ver" class="btn btn-primary" type="submit">Seleccionar</button>
+            </div>
+        </form>
+        
+        <br />
+        <br />
+
+        @if (Model.Proveedores.Count > 0)
+        {
+            <table class="table table-striped ">
+                <thead class="badge-dark">
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in Model.Proveedores)
+                    {
+                        <tr>
+
+                            <td>@producto.ID_prov</td>
+                            <td>@producto.Nombre_prov</td>
+                            <td>@producto.Numero_Telefonico_prov</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-md-right">
+                <a class="btn btn-primary" asp-controller="Proveedores" asp-action="VerProveedor">Más detalles</a>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <h4><span class="text-danger">No Existen Proveedores.</span></h4>
+                <a class="alert-link" asp-controller="Proveedores" asp-action="AgregarProveedor">¿Quieres agregar un proveedor?</a>
+            </div>
+        }
+    </div>
 </div>
+
+<style>
+    .formulario {
+        padding-right: 80px;
+    }
+</style>
+

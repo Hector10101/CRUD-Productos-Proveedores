@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "EditarProductos";
+    
+}
+
+<h1>Editar Producto</h1>
+<a class="alert-link" asp-action="AgregarProducto">¿Quieres agregar un producto?</a>
+<br />
+<br />
+<div class="col-6 formulario">
+    <form method="post" role="form">
+        <div class="form-group">
+            <h5>ID</h5>
+            <input id="ID" value="@ViewData["ID"]" class="form-control" />
+        </div>
+        <div class="form-group">
+            <h5>Nombre</h5>
+            <input value="@ViewData["Nombre"]" class="form-control" />
+        </div>
+        <div class="form-group">
+            <h5>Descripcion</h5>
+            <textarea value="" class="form-control" rows="3" >@ViewData["Descripcion"]</textarea>
+        </div>
+        <div class="form-group">
+            <h5>Frecha de Vencimiento</h5>
+            <input value="@ViewData["Fecha_Venci"]" class="form-control" />
+        </div>
+        <div class="form-group">
+            <h5>ID del Proveedor</h5>
+            <input value="@ViewData["ID_Proveedor"]" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button class="btn btn-primary" asp-action="ModificarProductos">Ir a Modificacion</button>
+    </form>
+</div>
